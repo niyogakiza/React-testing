@@ -1,0 +1,76 @@
+           Terms of testing either in mocha or Jasmine or...
+           =================================================
+describe: we use describe to group together similar tests
+=======
+describe('App') means we do testing in this component, describe takes a string
+and single function in that function there is it and expect that will test the behavior
+of the App
+it: we use "it" to test a single attribute target
+==
+
+expect: we use expect to make an' assertion about a target
+======
+
+Testing a form
+==============
+We care about:
+.It has a text area
+.It has a button
+.Entering text into the text area updates the text
+.It shows a comment un a li
+.Given a list of comments, it shows all the comments
+
+Test Structure SetUp
+====================
+. We use Chai jquery, https://github.com/chaijs/chai-jquery
+.we can use all jquery methods will work
+.we use beforeEach to avoid duplication of the code in each test
+-it will run let component then beforeEach then will test each it, will repeat that to each it.
+.in case there is a nested describe with another beforeEach in it, Mocha will run the first
+beforeEach then the second one then test the it in the second describe, will do the same to the
+next it testing and so on...
+
+Redux Side
+=========
+.Without Redux we don'thave ability to save comments or communicate between these components
+.We need create action creator to save each comment as they are created
+.We also need a Reducer to collect all the comments as they are created
+.Reducer will be responsible of comments piece of  state as they are created
+
+Reducer Testing
+===============
+.We will test the default case which is actions, the purpose of this is to test initial state,
+we gonna make sure that the array we refers to as default is never gonna changed accidentally with
+something else.
+.We gonna test each possible action that reducer care about
+*** .eql checks if objects are identical, is also used to compare strings and numbers.
+
+test_helper.js
+==============
+Mocha: Load tests, run them one by one, clean up after each.
+Chai: Helpers for asserting certain properties about the test subject
+***  test_helper.js setup
+
+.Set up testing environment to run like a browser in the command line
+----------------------------------------------------------------------
+- jsdom => https://github.com/tmpvar/jsdom
+A javascript implementation of the WHATWG DOM and HTML standards, for use with node.js
+
+- instead of window.document we use global.document ex:
+global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+this will create our fake browser in the terminal.
+
+- const $ = jquery(global.window); // is telling jquery to be only responsible on global.window
+
+
+.Build 'renderComponent' helper that should render a given react class
+----------------------------------------------------------------------
+.componentInstance is the copy of the class
+=>https://facebook.github.io/react/docs/test-utils.html
+
+
+.Build helper for simulating events
+------------------------------------
+
+.Set up chai-jquery
+--------------------
